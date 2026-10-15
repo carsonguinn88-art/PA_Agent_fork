@@ -23,8 +23,8 @@ DataSourceKind = Literal[
 # UI-visible sources — 可在界面下拉框直接选择。
 # MT5 为默认数据源，排在首位；eastmoney 等仍可通过隐藏 kind 创建。
 DATA_SOURCE_CHOICES: tuple[tuple[DataSourceKind, str], ...] = (
-    ("mt5", "MT5"),
     ("tradingview", "TradingView"),
+    ("mt5", "MT5"),
 )
 
 _HIDDEN_KINDS: frozenset[DataSourceKind] = frozenset(
@@ -48,11 +48,11 @@ def default_tradingview_exchange() -> str:
 
 
 def normalize_data_source_kind(kind: str | None) -> DataSourceKind:
-    """Return a supported data-source kind, defaulting to MT5."""
+    """Return a supported data-source kind, defaulting to TradingView."""
     supported = {k for k, _ in DATA_SOURCE_CHOICES} | _HIDDEN_KINDS
     if kind in supported:
         return kind  # type: ignore[return-value]
-    return "mt5"
+    return "tradingview"
 
 
 def data_source_label(kind: str | None) -> str:
